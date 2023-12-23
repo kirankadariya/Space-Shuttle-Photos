@@ -1,0 +1,118 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+header {
+  background-color: #023047;
+  padding: 1.5em;
+}
+
+h1 {
+  font-size: 2.45rem;
+  color: #d8f2ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h2 {
+  font-size: 1.75rem;
+}
+
+h3 {
+  font-size: 1.65rem;
+}
+
+.icon {
+  font-size: 0.95em;
+  margin-right: 15px;
+}
+
+main {
+  width: 90%;
+  margin: 0 auto;
+  padding: 1em 0 2em;
+  max-width: 550px;
+}
+
+p {
+  font-size: 1.125rem;
+  margin: 0 0 1.5em 0;
+}
+
+.error-msg {
+  background-color: rgb(255, 159, 143);
+  padding: 1em 0;
+  margin-bottom: 0;
+  display: none;
+}
+
+ul {
+  text-align: left;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 1.125rem;
+  padding: 0;
+}
+
+.rover-list {
+  display: flex;
+  flex-wrap: wrap;
+  height: 400px;
+  overflow: scroll;
+  justify-content: center;
+  padding-top: 1em;
+}
+
+li {
+  flex: 1 175px;
+}
+
+li img {
+  height: 120px;
+}
+
+img {
+  width: 100%;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.apod img {
+  height: 400px;
+  margin-bottom: 1em;
+}
+
+.calendar {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 10px;
+}
+
+input {
+  font-size: 1rem;
+  padding: 0.15em;
+}
+
+button {
+  background-color: #023047;
+  color: white;
+  border: none;
+  padding: 0.55em 1em;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #13638b;
+}
