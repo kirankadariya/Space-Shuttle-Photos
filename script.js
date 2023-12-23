@@ -1,3 +1,5 @@
+import {apiKey} from "./apiKey.js";
+const header = document.querySelector("header");
 const main = document.querySelector("main");
 const apodEl = document.querySelector(".apod");
 const roverList = document.querySelector(".rover-list");
@@ -5,8 +7,7 @@ const errorMsg = document.querySelector(".error-msg");
 const dateInput = document.querySelector("#date-input");
 const submitButton = document.querySelector("#submit-button");
 
-const apiKey = "YOUR API KEY";
-const apodURL = `https://api.nasa.gov/planetary/apod?api_key=z7b11OfI0riUZtS5pD6ncYG7RrCFaQIbupfGBQnb`;
+const apodURL = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
 
 async function fetchData(url, handleData) {
   try {
@@ -54,7 +55,7 @@ submitButton.addEventListener("click", function () {
     ? dateInput.value
     : new Date().toISOString().slice(0, 10);
 
-  const roverURL = `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=${date}&api_key=z7b11OfI0riUZtS5pD6ncYG7RrCFaQIbupfGBQnb`;
+  const roverURL = `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=${date}&api_key=${apiKey}`;
 
   fetchData(roverURL, handleRoverData);
 });
