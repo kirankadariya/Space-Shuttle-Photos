@@ -1,11 +1,12 @@
-import {apiKey} from "./apiKey.js";
-const header = document.querySelector("header");
+import {apiKey} from "./private.js";
+
 const main = document.querySelector("main");
 const apodEl = document.querySelector(".apod");
 const roverList = document.querySelector(".rover-list");
 const errorMsg = document.querySelector(".error-msg");
 const dateInput = document.querySelector("#date-input");
 const submitButton = document.querySelector("#submit-button");
+
 
 const apodURL = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
 
@@ -59,3 +60,4 @@ submitButton.addEventListener("click", function () {
 
   fetchData(roverURL, handleRoverData);
 });
+
