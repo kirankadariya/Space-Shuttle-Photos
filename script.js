@@ -1,4 +1,3 @@
-import {apiKey} from "./private.js";
 
 const main = document.querySelector("main");
 const apodEl = document.querySelector(".apod");
@@ -7,8 +6,7 @@ const errorMsg = document.querySelector(".error-msg");
 const dateInput = document.querySelector("#date-input");
 const submitButton = document.querySelector("#submit-button");
 
-
-const apodURL = "https://keen-trifle-dfb8e3.netlify.app/.netlify/functions/apodApi";
+const apodURL = "https://keen-trifle-dfb8e3.netlify.app/.netlify/functions/apodApi"; 
 
 async function fetchData(url, handleData) {
   try {
