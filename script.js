@@ -8,7 +8,7 @@ const dateInput = document.querySelector("#date-input");
 const submitButton = document.querySelector("#submit-button");
 
 
-const apodURL = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
+const apodURL = `https://keen-trifle-dfb8e3.netlify.app/.netlify/functions/apodApi`;
 
 async function fetchData(url, handleData) {
   try {

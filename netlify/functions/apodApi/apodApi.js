@@ -1,10 +1,15 @@
 // Docs on event and context https://docs.netlify.com/functions/build/#code-your-function-2
 const handler = async (event) => {
-  try {
-    const subject = event.queryStringParameters.name || 'World'
+  try {   const ApiKEY = process.env.ApiKey;
+    const response = await fetch('https://api.nasa.gov/planetary/apod?api_key=${ApiKEY}');
+    const data = await response.json();
+ 
+
     return {
+    
+
       statusCode: 200,
-      body: JSON.stringify({ message: `Hello ${subject}` }),
+      body: JSON.stringify(data),
       // // more keys you can return:
       // headers: { "headerName": "headerValue", ... },
       // isBase64Encoded: true,
