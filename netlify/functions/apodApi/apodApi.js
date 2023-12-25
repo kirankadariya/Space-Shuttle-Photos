@@ -1,9 +1,11 @@
 // Docs on event and context https://docs.netlify.com/functions/build/#code-your-function-2
 const handler = async (event) => {
-  try {   const apiKEY = process.env.Api_KEY;
-    const response = await fetch('https://api.nasa.gov/planetary/apod?api_key=${apiKEY}');
+
+  try {    const apiKEY = process.env.Api_KEY;
+    const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKEY}`);
     const data = await response.json();
  
+
     return {
     
       statusCode: 200,
