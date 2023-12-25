@@ -55,7 +55,7 @@ submitButton.addEventListener("click", function () {
     ? dateInput.value
     : new Date().toISOString().slice(0, 10);
 
-  const roverURL = `https://keen-trifle-dfb8e3.netlify.app/.netlify/functions/roverApi date=${date}`;
+    const roverURL = `https://keen-trifle-dfb8e3.netlify.app/.netlify/functions/roverApi?date=${date}`;
 
   fetchData(roverURL, handleRoverData);
 });
