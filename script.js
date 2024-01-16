@@ -28,7 +28,8 @@ async function fetchData(url, handleData) {
 function handleApodData(data) {
   const html = `
     <img src="${data.url}" alt="apod">
-    <p>${data.title}</p>
+    <h4>${data.title}</h4>
+    <p>${data.explanation</p>
   `;
   apodEl.insertAdjacentHTML("beforeend", html);
 }
