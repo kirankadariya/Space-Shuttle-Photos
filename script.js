@@ -29,7 +29,7 @@ function handleApodData(data) {
   const html = `
     <img src="${data.url}" alt="apod">
     <h4>${data.title}</h4>
-    <p>${data.explanation</p>
+    <p>${data.explanation}</p>
   `;
   apodEl.insertAdjacentHTML("beforeend", html);
 }
