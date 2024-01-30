@@ -7,7 +7,7 @@ const errorMsg = document.querySelector(".error-msg");
 const dateInput = document.querySelector("#date-input");
 const submitButton = document.querySelector("#submit-button");
 
-const apodURL = "https://keen-trifle-dfb8e3.netlify.app/.netlify/functions/apodApi"; 
+const apodURL = "https://main--space-shuttle-mar.netlify.app/functions/apodApi";
 
 async function fetchData(url, handleData) {
   try {
@@ -56,7 +56,7 @@ submitButton.addEventListener("click", function () {
     ? dateInput.value
     : new Date().toISOString().slice(0, 10);
 
-    const roverURL = `https://keen-trifle-dfb8e3.netlify.app/.netlify/functions/roverApi?date=${date}`;
+    const roverURL = `https://main--space-shuttle-mar.netlify.app/functions/roverApi?date=${date}`;
 
   fetchData(roverURL, handleRoverData);
 });
