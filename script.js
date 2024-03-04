@@ -7,7 +7,7 @@ const errorMsg = document.querySelector(".error-msg");
 const dateInput = document.querySelector("#date-input");
 const submitButton = document.querySelector("#submit-button");
 
-const apodURL = "https://space-shuttle-mar.netlify.app/.netlify/functions/apodApi"; 
+const apodURL = `https://space-shuttle-mar.netlify.app/.netlify/functions/apodApi`; 
 
 async function fetchData(url, handleData) {
   try {
