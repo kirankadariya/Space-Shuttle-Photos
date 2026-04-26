@@ -1,21 +1,3 @@
-const https = require("https");
-
-function httpsGet(url) {
-  return new Promise((resolve, reject) => {
-    https.get(url, (res) => {
-      let raw = "";
-      res.on("data", (chunk) => (raw += chunk));
-      res.on("end", () => {
-        try {
-          resolve({ status: res.statusCode, data: JSON.parse(raw) });
-        } catch (e) {
-          reject(new Error("Failed to parse NASA response: " + raw.slice(0, 200)));
-        }
-      });
-    }).on("error", reject);
-  });
-}
-
 export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
@@ -25,14 +7,25 @@ export default async function handler(req, res) {
 
   try {
     const apiKEY = process.env.Api_KEY || "DEMO_KEY";
-    const { status, data } = await httpsGet(
+    const response = await fetch(
       `https://api.nasa.gov/planetary/apod?api_key=${apiKEY}`
     );
 
-    if (status !== 200) {
-      return res.status(status).json({
-        error: data.error?.message || data.msg || `NASA returned status ${status}`,
-        nasa_response: data
+    // Read raw text first — NASA sometimes returns HTML on errors
+    const text = await response.text();
+
+    // If it starts with '<', NASA returned an HTML error page
+    if (text.trimStart().startsWith("<")) {
+      return res.status(429).json({
+        error: "NASA API rate limit exceeded. Please add your own API key at api.nasa.gov or wait an hour."
+      });
+    }
+
+    const data = JSON.parse(text);
+
+    if (!response.ok || data.error) {
+      return res.status(response.status || 500).json({
+        error: data.error?.message || data.msg || `NASA API error: ${response.status}`
       });
     }
 
