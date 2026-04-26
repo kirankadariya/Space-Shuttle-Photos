@@ -8,15 +8,12 @@ async function fetchData(url, handleData) {
   try {
     errorMsg.style.display = "none";
     const response = await fetch(url);
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
     const data = await response.json();
 
-    if (data.error) {
-      throw new Error(data.error.message || JSON.stringify(data.error));
+    if (!response.ok) {
+      // Show the real error message from NASA or our function
+      const msg = data.error || data.msg || `HTTP error! Status: ${response.status}`;
+      throw new Error(msg);
     }
 
     handleData(data);
@@ -52,12 +49,11 @@ function handleRoverData(data) {
   }
 }
 
-// Fetch APOD on page load — calls /api/apod (Vercel serverless function)
+// Load APOD on page start
 fetchData("/api/apod", handleApodData);
 
 submitButton.addEventListener("click", function () {
   roverList.innerHTML = "<li>Loading...</li>";
   const date = dateInput.value || new Date().toISOString().slice(0, 10);
-  // Calls /api/rover?date=YYYY-MM-DD (Vercel serverless function)
   fetchData(`/api/rover?date=${date}`, handleRoverData);
 });
