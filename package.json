@@ -1,0 +1,8 @@
+{
+  "name": "space-shuttle-photos",
+  "version": "1.0.0",
+  "description": "Space Shuttle Photos using NASA APIs",
+  "dependencies": {
+    "node-fetch": "^2.7.0"
+  }
+}

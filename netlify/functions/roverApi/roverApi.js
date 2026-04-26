@@ -1,4 +1,3 @@
-// Docs on event and context https://docs.netlify.com/functions/build/#code-your-function-2
 const handler = async (event) => {
   const corsHeaders = {
     "Access-Control-Allow-Origin": "*",
@@ -7,29 +6,31 @@ const handler = async (event) => {
     "Content-Type": "application/json",
   };
 
-  // Handle preflight OPTIONS request
   if (event.httpMethod === "OPTIONS") {
     return { statusCode: 204, headers: corsHeaders, body: "" };
   }
 
   try {
-    const apiKEY = process.env.Api_KEY;
+    // Use real API key from env, fall back to NASA DEMO_KEY for testing
+    const apiKEY = process.env.Api_KEY || "DEMO_KEY";
     const date =
       (event.queryStringParameters && event.queryStringParameters.date) ||
       new Date().toISOString().slice(0, 10);
 
-    // Use node-fetch if native fetch is unavailable (Node < 18)
     const fetchFn = typeof fetch !== "undefined" ? fetch : require("node-fetch");
 
     const response = await fetchFn(
       `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=${date}&api_key=${apiKEY}`
     );
 
-    if (!response.ok) {
-      throw new Error(`NASA API error: ${response.status} ${response.statusText}`);
-    }
-
     const data = await response.json();
+
+    if (!response.ok) {
+      console.error("NASA Rover API error:", data);
+      throw new Error(
+        data.error?.message || `NASA API returned status ${response.status}`
+      );
+    }
 
     return {
       statusCode: 200,
@@ -37,10 +38,11 @@ const handler = async (event) => {
       body: JSON.stringify(data),
     };
   } catch (error) {
+    console.error("roverApi handler error:", error);
     return {
       statusCode: 500,
       headers: corsHeaders,
-      body: JSON.stringify({ error: error.toString() }),
+      body: JSON.stringify({ error: error.message }),
     };
   }
 };
